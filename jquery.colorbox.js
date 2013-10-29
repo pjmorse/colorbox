@@ -1,3 +1,6 @@
+/*jslint browser: true, devel: true, white: true, sloppy: true */
+/*global jQuery, $ */
+
 /*!
 	Colorbox v1.4.32 - 2013-10-16
 	jQuery lightbox and modal window plugin
@@ -161,7 +164,7 @@
 	// Get the window height using innerHeight when available to avoid an issue with iOS
 	// http://bugs.jquery.com/ticket/6724
 	function winheight() {
-		return window.innerHeight ? window.innerHeight : $(window).height();
+		return window.innerHeight || $(window).height();
 	}
 
 	// Determine the next and previous members in a group.
@@ -200,7 +203,7 @@
 		var i,
 			data = $.data(element, colorbox);
 		
-		if (data == null) {
+		if (data === null) {
 			settings = $.extend({}, defaults);
 			if (console && console.log) {
 				console.log('Error: cboxElement missing settings object');
@@ -878,7 +881,7 @@
 		}
 	};
 
-	function load () {
+	function load() {
 		var href, setResize, prep = publicMethod.prep, $inline, request = ++requests;
 		
 		active = true;
@@ -982,8 +985,8 @@
 				if (settings.scalePhotos) {
 					setResize = function () {
                         if (percent < 1) {
-    						photo.height -= photo.height * percent;
-    						photo.width -= photo.width * percent;
+                            photo.height -= photo.height * percent;
+                            photo.width -= photo.width * percent;
                         } else {
                             // Scale photos *up*, too
                             photo.height = photo.height * percent;
@@ -995,14 +998,14 @@
 						setResize();
 					} else if (settings.mw && photo.width < settings.mw) {
                         // Expand photo to fill colorbox
-					    percent = settings.mw / photo.width;
+                        percent = settings.mw / photo.width;
                         setResize();
 					}
 					if (settings.mh && photo.height > settings.mh) {
-						percent = (photo.height - settings.mh) / photo.height;
+                        percent = (photo.height - settings.mh) / photo.height;
 						setResize();
 					} else if (settings.mh && photo.height < settings.mh) {
-					    percent = settings.mh / photo.height;
+                        percent = settings.mh / photo.height;
                         setResize();
 					}
 				}
